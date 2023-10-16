@@ -1,5 +1,92 @@
 # LOCATE
-[BMVC 2023] Official repository for "LOCATE: Self-supervised Object Discovery via Flow-guided Graph-cut and Bootstrapped Self-training"- 
+[BMVC 2023] Official repository for "LOCATE: Self-supervised Object Discovery via Flow-guided Graph-cut and Bootstrapped Self-training"  
 *Silky Singh, Shripad Deshmukh, Mausoom Sarkar, Balaji Krishnamurthy.*
 
+![qual results](assets/locate_VOS_qual.png)
 
+Our self-supervised method LOCATE trained on video datasets can perform object segmentation on standalone images.
+
+<!-- ![model pipeline](assets/model_pipeline.png) -->
+
+## Installation
+
+### Create a conda environment
+
+```
+conda create -n locate python=3.8
+conda activate locate
+```
+
+The code has been tested with `python=3.8`, `pytorch=1.12.1`, `torchvision=0.13.1` with `cudatoolkit=11.3` on Nvidia A100 machine.
+
+Use the official Pytorch installation instructions provided [here](https://pytorch.org/get-started/previous-versions/).
+
+Other dependencies can be installed following the [guess-what-moves](https://github.com/karazijal/guess-what-moves) repository. It is mentioned below for completeness.
+
+```
+conda install -y pytorch==1.12.1 torchvision==0.13.1 cudatoolkit=11.3 -c pytorch
+conda install -y kornia jupyter tensorboard timm einops scikit-learn scikit-image openexr-python tqdm gcc_linux-64=11 gxx_linux-64=11 fontconfig -c conda-forge
+pip install cvbase opencv-python wandb 
+python -m pip install 'git+https://github.com/facebookresearch/detectron2.git'
+```
+
+
+## Datasets
+
+We have tested our method on video object segmentation datasets (DAVIS 2016, FBMS59, SegTrackv2), image saliency detection (DUTS, ECSSD, OMRON) and object segmentation (CUB, Flowers-102) benchmarks.  
+
+
+## Training
+
+### Step 1. Graph Cut
+
+We utilise the MaskCut algorithm from the CutLER's repository [[link](https://github.com/facebookresearch/CutLER)] with `N=1` to get the segmentation mask for the salient object in all the video frames independently. We modify the pipeline to take in optical flow features of the video frame, and combine both image and flow features in a linear combination to produce edge weights. The modified code can be found at: `/path/to/new/graphcut`. 
+
+We perform a single round of post-processing using Conditional Random Fields (CRF) to get pixel-level segmentation masks. The initial segmentation masks will be released for all the datasets. 
+
+
+### Step 2. Bootstrapped Self-training
+
+Using segmentation masks from previous step as pseudo-ground-truth, we train a [MaskFormer](https://github.com/facebookresearch/MaskFormer) network.
+
+In the `src` directory, run the following command for training:
+```
+python main.py GWM.DATASET <dataset> LOG_ID <log_id>
+```
+where `dataset` (e.g., `DAVIS`), `log_id` (e.g., `davis`) need to be set.
+
+
+## Testing/Inference
+
+Use the test script for running inference: `/path/to/test.py`
+
+
+## Model Checkpoints
+
+| Dataset | Checkpoint |
+| ------- | ---------- |
+| DAVIS16 | `/path/to/davis/ckpt` |
+| SegTrackv2 | `/path/to/segtrack/ckpt` |
+| FBMS59 | `/path/to/fbms/ckpt` |
+| Combined | `/path/to/combined/ckpt` |
+
+The Combined checkpoint refers to the model trained on all the video datasets (DAVIS16, SegTrackv2, FBMS59) combined.
+
+## Acknowledgments
+
+This repository is heavily based on [guess-what-moves](https://github.com/karazijal/guess-what-moves), [CutLER](https://github.com/facebookresearch/CutLER). We thank all the respective authors for open-sourcing their amazing work! 
+
+
+
+## Citation
+
+If you find this work useful, please consider citing:
+
+```
+@article{singh2023locate,
+  title={LOCATE: Self-supervised Object Discovery via Flow-guided Graph-cut and Bootstrapped Self-training},
+  author={Singh, Silky and Deshmukh, Shripad and Sarkar, Mausoom and Krishnamurthy, Balaji},
+  journal={arXiv preprint arXiv:2308.11239},
+  year={2023}
+}
+```
