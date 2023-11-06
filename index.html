@@ -50,11 +50,11 @@
 	
 	a:link,a:visited
 	{
-		color: #1367a7;
+		color: #9b111e;
 		text-decoration: none;
 	}
 	a:hover {
-		color: #208799;
+		color: #9b111e;
 	}
 	
 	td.dl-link {
@@ -138,23 +138,28 @@
 <body>
 	<br>
 	<center>
-		<span style="font-size:36px">Creative and Descriptive Paper Title</span>
+		<span style="font-size:36px">LOCATE: Self-supervised Object Discovery via Flow-guided Graph-cut and Bootstrapped Self-training</span>
 		<table align=center width=600px>
 			<table align=center width=600px>
 				<tr>
 					<td align=center width=100px>
 						<center>
-							<span style="font-size:24px"><a href="https://en.wikipedia.org/wiki/James_J._Gibson">First Author</a></span>
+							<span style="font-size:24px"><a href="https://silky1708.github.io/">Silky Singh</a></span>
 						</center>
 					</td>
 					<td align=center width=100px>
 						<center>
-							<span style="font-size:24px"><a href="https://en.wikipedia.org/wiki/James_J._Gibson">Second Author</a></span>
+							<span style="font-size:24px"><a href="">Shripad Deshmukh</a></span>
 						</center>
 					</td>
 					<td align=center width=100px>
 						<center>
-							<span style="font-size:24px"><a href="https://en.wikipedia.org/wiki/James_J._Gibson">Third Author</a></span>
+							<span style="font-size:24px"><a href="">Mausoom Sarkar</a></span>
+						</center>
+					</td>
+                    <td align=center width=100px>
+						<center>
+							<span style="font-size:24px"><a href="">Balaji Krishnamurthy</a></span>
 						</center>
 					</td>
 				</tr>
@@ -163,12 +168,12 @@
 				<tr>
 					<td align=center width=120px>
 						<center>
-							<span style="font-size:24px"><a href=''>[Paper]</a></span>
+							<span style="font-size:24px"><a href='https://arxiv.org/abs/2308.11239'>[Paper]</a></span>
 						</center>
 					</td>
 					<td align=center width=120px>
 						<center>
-							<span style="font-size:24px"><a href='https://github.com/richzhang/webpage-template'>[GitHub]</a></span><br>
+							<span style="font-size:24px"><a href='https://github.com/silky1708/LOCATE'>[GitHub]</a></span><br>
 						</center>
 					</td>
 				</tr>
@@ -181,18 +186,18 @@
 			<tr>
 				<td width=260px>
 					<center>
-						<img class="round" style="width:500px" src="./resources/teaser.png"/>
+						<img class="round" style="width:500px" src="./assets/locate_VOS_qual.png"/>
 					</center>
 				</td>
 			</tr>
 		</table>
-		<table align=center width=850px>
+		<!-- <table align=center width=850px>
 			<tr>
 				<td>
 					This was a template originally made for <a href="http://richzhang.github.io/colorization/">Colorful Image Colorization</a>. The code can be found in this <a href="https://github.com/richzhang/webpage-template">repository</a>.
 				</td>
 			</tr>
-		</table>
+		</table> -->
 	</center>
 
 	<hr>
@@ -201,13 +206,13 @@
 		<center><h1>Abstract</h1></center>
 		<tr>
 			<td>
-				This is my abstract.
+				Learning object segmentation in image and video datasets without human supervision is a challenging problem. Humans easily identify moving salient objects in videos using the gestalt principle of common fate, which suggests that what moves together belongs together. Building upon this idea, we propose a self-supervised object discovery approach that leverages motion and appearance information to produce high-quality object segmentation masks. Specifically, we redesign the traditional graph cut on images to include motion information in a linear combination with appearance information to produce edge weights. Remarkably, this step produces object segmentation masks comparable to the current state-of-the-art on multiple benchmarks. To further improve performance, we bootstrap a segmentation network trained on these preliminary masks as pseudo-ground truths to learn from its own outputs via self-training. We demonstrate the effectiveness of our approach, named LOCATE, on multiple standard video object segmentation, image saliency detection, and object segmentation benchmarks, achieving results on par with and, in many cases surpassing state-of-the-art methods. We also demonstrate the transferability of our approach to novel domains through a qualitative study on in-the-wild images. Additionally, we present extensive ablation analysis to support our design choices and highlight the contribution of each component of our proposed method.
 			</td>
 		</tr>
 	</table>
 	<br>
 
-	<hr>
+	<!-- <hr>
 	<center><h1>Talk</h1></center>
 	<p align="center">
 		<iframe width="660" height="395" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen align="center"></iframe>
@@ -222,8 +227,9 @@
 			</center>
 		</tr>
 	</table>
-	<hr>
+	<hr> -->
 
+    <!-- <hr>
 	<center><h1>Code</h1></center>
 
 	<table align=center width=420px>
@@ -259,16 +265,18 @@
 			</center>
 		</span>
 	</table>
-	<br>
+	<br> -->
+
+
 	<hr>
 	<table align=center width=450px>
 		<center><h1>Paper and Supplementary Material</h1></center>
 		<tr>
 			<td><a href=""><img class="layered-paper-big" style="height:175px" src="./resources/paper.png"/></a></td>
-			<td><span style="font-size:14pt">F. Author, S. Author, T. Author.<br>
-				<b>Creative and Descriptive Paper Title.</b><br>
-				In Conference, 20XX.<br>
-				(hosted on <a href="">ArXiv</a>)<br>
+			<td><span style="font-size:14pt">Silky Singh, Shripad Deshmukh, Mausoom Sarkar, Balaji Krishnamurthy<br>
+				<b>LOCATE: Self-supervised Object Discovery via Flow-guided Graph-cut and Bootstrapped Self-training</b><br>
+				BMVC 2023.<br>
+				(hosted on <a href="https://arxiv.org/abs/2308.11239">ArXiv</a>)<br>
 				<!-- (<a href="./resources/camera-ready.pdf">camera ready</a>)<br> -->
 				<span style="font-size:4pt"><a href=""><br></a>
 				</span>

@@ -1,6 +1,6 @@
-@inproceedings{author20XXtitle,
-  title={Please cite me},
-  author={Author, First and Author, Second and Author, Third},
-  booktitle={Conference},
-  year={20XX}
+@article{singh2023locate,
+  title={LOCATE: Self-supervised Object Discovery via Flow-guided Graph-cut and Bootstrapped Self-training},
+  author={Singh, Silky and Deshmukh, Shripad and Sarkar, Mausoom and Krishnamurthy, Balaji},
+  journal={arXiv preprint arXiv:2308.11239},
+  year={2023}
 }
