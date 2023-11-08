@@ -4,7 +4,7 @@
 
 ![qual results](assets/locate_VOS_qual.png)
 
-Our self-supervised method LOCATE trained on video datasets can perform object segmentation on standalone images.
+Our self-supervised framework LOCATE trained on video datasets can perform object segmentation on standalone images.
 
 <!-- ![model pipeline](assets/model_pipeline.png) -->
 
@@ -47,7 +47,7 @@ We perform a single round of post-processing using Conditional Random Fields (CR
 
 ### Step 2. Bootstrapped Self-training
 
-Using segmentation masks from previous step as pseudo-ground-truth, we train a [MaskFormer](https://github.com/facebookresearch/MaskFormer) network.
+Using segmentation masks from previous step as pseudo-ground-truth, we train a [segmentation](https://github.com/facebookresearch/MaskFormer) network.
 
 In the `src` directory, run the following command for training:
 ```
@@ -63,14 +63,15 @@ Use the test script for running inference: `/path/to/test.py`
 
 ## Model Checkpoints
 
-| Dataset | Checkpoint |
+| Dataset | Checkpoint path |
 | ------- | ---------- |
-| DAVIS16 | `/path/to/davis/ckpt` |
-| SegTrackv2 | `/path/to/segtrack/ckpt` |
-| FBMS59 | `/path/to/fbms/ckpt` |
-| Combined | `/path/to/combined/ckpt` |
+| DAVIS16 | `locate_checkpoints/davis2016.pth` |
+| SegTrackv2 | `locate_checkpoints/segtrackv2.pth` |
+| FBMS59 (graph-cut masks) | `locate_checkpoints/fbms59_graphcut.pth` |
+| FBMS59 (zero-shot) | `locate_checkpoints/fbms59_zero_shot.pth` |
+| DAVIS16+STv2+FBMS | `locate_checkpoints/combined.pth` |
 
-The Combined checkpoint refers to the model trained on all the video datasets (DAVIS16, SegTrackv2, FBMS59) combined.
+The checkpoints are released [here](https://www.dropbox.com/scl/fo/v2akgrbzyyvkgtr98x2ok/h?rlkey=wfhmcm26fb3ivirdpx6pdkdxb&dl=0). The `combined.pth` checkpoint refers to the model trained on all the video datasets (DAVIS16, SegTrackv2, FBMS59) combined.
 
 ## Acknowledgments
 
