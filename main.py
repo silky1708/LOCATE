@@ -68,14 +68,6 @@ def main(args):
     iteration = 0 if args.resume_path is None else checkpoint['iteration']
 
     train_loader, val_loader = config.loaders(cfg)
-
-    # overfit single batch for debug
-    # sample = next(iter(loader))
-
-    # criterions = {
-    #     'reconstruction': (losses.ReconstructionLoss(cfg, model), cfg.GWM.LOSS_MULT.REC, lambda x: 1)}
-
-    # criterion = losses.CriterionDict(criterions)
     criterion = losses.BCELoss(cfg, model)
 
     if args.eval_only:
@@ -136,54 +128,23 @@ def main(args):
                 else:
                     logger.debug_once(f'Unfreezing disabled schedule: {cfg.FLAGS.UNFREEZE_AT}')
 
-                # sample = [e for s in sample for e in s]
-                # flow_key = 'flow'
                 raw_sem_seg = False
                 if cfg.GWM.FLOW_RES is not None:
-                    # flow_key = 'flow_big'
                     raw_sem_seg = cfg.MODEL.SEM_SEG_HEAD.PIXEL_DECODER_NAME == 'MegaBigPixelDecoder'
 
-                # flow = torch.stack([x[flow_key].to(model.device) for x in sample]).clip(-20, 20)
-                # logger.debug_once(f'flow shape: {flow.shape}')
                 preds = model.forward_base(sample, keys=cfg.GWM.SAMPLE_KEYS, get_eval=True, raw_sem_seg=raw_sem_seg)
                 masks_raw = torch.stack([x['sem_seg'] for x in preds], 0)
                 logger.debug_once(f'mask shape: {masks_raw.shape}')
                 masks_softmaxed_list = [torch.sigmoid(masks_raw)]
-                # masks_softmaxed_list = [torch.softmax(masks_raw, dim=1)]
-
-
+                
                 total_losses = []
-                # log_dicts = []
                 for mask_idx, masks_softmaxed in enumerate(masks_softmaxed_list):
                     pseudo_gt = torch.stack([x["pseudo_gt"].to(model.device) for x in sample], dim=0)
                     loss = criterion(masks_softmaxed, pseudo_gt)
-
-                    # loss, log_dict = criterion(sample, flow, masks_softmaxed, iteration)
-                    # if cfg.GWM.USE_MULT_FLOW:
-                    #     flow2 = torch.stack([x[flow_key + '_2'].to(model.device) for x in sample]).clip(-20, 20)
-                    #     other_loss, other_log_dict = criterion(sample, flow2, masks_softmaxed, iteration)
-                    #     loss = loss / 2 + other_loss / 2
-                    #     for k, v in other_log_dict.items():
-                    #         log_dict[k] = other_log_dict[k] / 2 + v / 2
                     total_losses.append(loss)
-                    # log_dicts.append(log_dict)
 
                 loss = total_losses[0]
-                # loss_ws = cfg.GWM.LOSS_MULT.HEIR_W
-                # total_w = float(sum(loss_ws[:len(total_losses)]))
-                # log_dict = {}
-                # if len(total_losses) == 1:
-                    # log_dict = log_dicts[0]
-                    # loss = total_losses[0]
-                # else:
-                #     loss = 0
-                #     for i, (tl, w, ld) in enumerate(zip(total_losses, loss_ws, log_dicts)):
-                #         for k, v in ld.items():
-                #             log_dict[f'{k}_{i}'] = v * w / total_w
-                #         loss += tl * w / total_w
 
-                # train_log_dict = {f'train/{k}': v for k, v in log_dict.items()}
-                # del log_dict
                 train_log_dict = {}
                 train_log_dict['train/learning_rate'] = optimizer.param_groups[-1]['lr']
                 train_log_dict['train/loss_total'] = loss.item()
@@ -215,12 +176,6 @@ def main(args):
 
                 if (iteration + 1) % cfg.LOG_FREQ == 0 or (iteration + 1) in [1]:   # or (iteration + 1) in [1, 50, 500]
                     model.eval()
-                    # if writer:
-                    #     flow = torch.stack([x['flow'].to(model.device) for x in sample]).clip(-20, 20)
-                    #     image_viz, header_text = get_unsup_image_viz(model, cfg, sample, criterion)
-                    #     header = get_vis_header(image_viz.size(2), flow.size(3), header_text)
-                    #     image_viz = torch.cat([header, image_viz], dim=1)
-                    #     writer.add_image('train/images', image_viz, iteration + 1)
                     if cfg.WANDB.ENABLE and (iteration + 1) % 2500 == 0:
                         image_viz = get_unsup_image_viz(model, cfg, sample)
                         wandb.log({'train/viz': wandb.Image(image_viz.float())}, step=iteration + 1)
@@ -273,17 +228,3 @@ if __name__ == "__main__":
 
     main(args)
 
-
-    # args.num_gpus = 4
-    # args.num_machines = 
-    # args.machine_rank = 
-    # args.dist_url = 
-    # launch(
-    #     main,
-    #     args.num_gpus,
-    #     # num_machines=args.num_machines,
-    #     # machine_rank=args.machine_rank,
-    #     # dist_url=args.dist_url,
-    #     args=(args,),
-    # )
-    

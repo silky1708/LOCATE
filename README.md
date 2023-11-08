@@ -49,16 +49,11 @@ We perform a single round of post-processing using Conditional Random Fields (CR
 
 Using segmentation masks from previous step as pseudo-ground-truth, we train a [segmentation](https://github.com/facebookresearch/MaskFormer) network.
 
-In the `src` directory, run the following command for training:
-```
-python main.py GWM.DATASET <dataset> LOG_ID <log_id>
-```
-where `dataset` (e.g., `DAVIS`), `log_id` (e.g., `davis`) need to be set.
-
+In the root directory, run `train.sh`.
 
 ## Testing/Inference
 
-Use the test script for running inference: `/path/to/test.py`
+Use the test script for running inference: `python test.py`
 
 
 ## Model Checkpoints
