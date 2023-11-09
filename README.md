@@ -40,9 +40,9 @@ We have tested our method on video object segmentation datasets (DAVIS 2016, FBM
 
 ### Step 1. Graph Cut
 
-We utilise the MaskCut algorithm from the CutLER's repository [[link](https://github.com/facebookresearch/CutLER)] with `N=1` to get the segmentation mask for the salient object in all the video frames independently. We modify the pipeline to take in optical flow features of the video frame, and combine both image and flow features in a linear combination to produce edge weights. The modified code can be found at: `/path/to/new/graphcut`. 
+We utilise the MaskCut algorithm from the CutLER's repository [[link](https://github.com/facebookresearch/CutLER)] with `N=1` to get the segmentation mask for the salient object in all the video frames independently. We modify the pipeline to take in optical flow features of the video frame, and combine both image and flow feature similarities in a linear combination to produce edge weights. The modified code can be found in the `CutLER` directory. 
 
-We perform a single round of post-processing using Conditional Random Fields (CRF) to get pixel-level segmentation masks. The initial segmentation masks will be released for all the datasets. 
+We perform a single round of post-processing using Conditional Random Fields (CRF) to get pixel-level segmentation masks. The graphcut masks for all the datasets are released [here](https://www.dropbox.com/scl/fo/wdr6jxutv9x4zte1n8jyz/h?rlkey=ayfmd4dp03tjdg6a2m0xg4iac&dl=0). We use [ARFlow](https://github.com/lliuz/ARFlow) trained on the synthetic Sintel dataset to compute the optical flow between video frames.
 
 
 ### Step 2. Bootstrapped Self-training
