@@ -4,7 +4,9 @@
 
 ![qual results](assets/locate_VOS_qual.png)
 
-Our self-supervised framework LOCATE trained on video datasets can perform object segmentation on standalone images.
+Our self-supervised framework LOCATE trained on video datasets can perform object segmentation on standalone images. 
+[project page](https://silky1708.github.io/LOCATE/) | [arXiv](https://arxiv.org/abs/2308.11239) | [bibtex](https://github.com/silky1708/LOCATE/tree/main#citation)
+
 
 <!-- ![model pipeline](assets/model_pipeline.png) -->
 
@@ -19,9 +21,7 @@ conda activate locate
 
 The code has been tested with `python=3.8`, `pytorch=1.12.1`, `torchvision=0.13.1` with `cudatoolkit=11.3` on Nvidia A100 machine.
 
-Use the official Pytorch installation instructions provided [here](https://pytorch.org/get-started/previous-versions/).
-
-Other dependencies can be installed following the [guess-what-moves](https://github.com/karazijal/guess-what-moves) repository. It is mentioned below for completeness.
+Use the official Pytorch installation instructions provided [here](https://pytorch.org/get-started/previous-versions/). Other dependencies can be installed following the [guess-what-moves](https://github.com/karazijal/guess-what-moves) repository. It is mentioned below for completeness.
 
 ```
 conda install -y pytorch==1.12.1 torchvision==0.13.1 cudatoolkit=11.3 -c pytorch
@@ -47,11 +47,9 @@ We perform a single round of post-processing using Conditional Random Fields (CR
 
 ### Step 2. Bootstrapped Self-training
 
-Using segmentation masks from previous step as pseudo-ground-truth, we train a [segmentation](https://github.com/facebookresearch/MaskFormer) network.
+Using segmentation masks from previous step as pseudo-ground-truth, we train a [segmentation](https://github.com/facebookresearch/MaskFormer) network. In the root directory, run `train.sh`.
 
-In the root directory, run `train.sh`.
-
-## Testing/Inference
+## Inference
 
 Use the test script for running inference: `python test.py`
 
