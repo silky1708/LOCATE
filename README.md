@@ -1,12 +1,13 @@
 # LOCATE
 [BMVC 2023] Official repository for "LOCATE: Self-supervised Object Discovery via Flow-guided Graph-cut and Bootstrapped Self-training"  
-*Silky Singh, Shripad Deshmukh, Mausoom Sarkar, Balaji Krishnamurthy.*
+*Silky Singh, Shripad Deshmukh, Mausoom Sarkar, Balaji Krishnamurthy.*  
+
+[project page](https://silky1708.github.io/LOCATE/) | [arXiv](https://arxiv.org/abs/2308.11239) | [bibtex](https://github.com/silky1708/LOCATE/tree/main#citation)  
+
 
 ![qual results](assets/locate_VOS_qual.png)
 
 Our self-supervised framework LOCATE trained on video datasets can perform object segmentation on standalone images. 
-[project page](https://silky1708.github.io/LOCATE/) | [arXiv](https://arxiv.org/abs/2308.11239) | [bibtex](https://github.com/silky1708/LOCATE/tree/main#citation)
-
 
 <!-- ![model pipeline](assets/model_pipeline.png) -->
 
