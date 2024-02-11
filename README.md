@@ -78,6 +78,17 @@ This repository is heavily based on [guess-what-moves](https://github.com/karazi
 If you find this work useful, please consider citing:
 
 ```
+@inproceedings{Singh_2023_BMVC,
+author    = {Silky Singh and Shripad V Deshmukh and Mausoom Sarkar and Balaji Krishnamurthy},
+title     = {LOCATE: Self-supervised Object Discovery via Flow-guided Graph-cut and Bootstrapped Self-training},
+booktitle = {34th British Machine Vision Conference 2023, {BMVC} 2023, Aberdeen, UK, November 20-24, 2023},
+publisher = {BMVA},
+year      = {2023},
+url       = {https://papers.bmvc2023.org/0295.pdf}
+}
+```
+
+```
 @article{singh2023locate,
   title={LOCATE: Self-supervised Object Discovery via Flow-guided Graph-cut and Bootstrapped Self-training},
   author={Singh, Silky and Deshmukh, Shripad and Sarkar, Mausoom and Krishnamurthy, Balaji},
