@@ -69,7 +69,7 @@ The checkpoints are released [here](https://www.dropbox.com/scl/fo/v2akgrbzyyvkg
 
 ## Acknowledgments
 
-This repository is heavily based on [guess-what-moves](https://github.com/karazijal/guess-what-moves), [CutLER](https://github.com/facebookresearch/CutLER). We thank all the respective authors for open-sourcing their amazing work! 
+This repository is built upon [guess-what-moves](https://github.com/karazijal/guess-what-moves), [CutLER](https://github.com/facebookresearch/CutLER). We thank all the respective authors for open-sourcing their amazing work! 
 
 
 
